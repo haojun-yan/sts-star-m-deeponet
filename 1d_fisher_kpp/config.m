@@ -1,0 +1,71 @@
+function cfg = config()
+% Configure a single Fisher--KPP experiment.
+%% Common
+cfg.common.run_svd_deeponet = true; % Train the fixed global basis model.
+cfg.common.run_sts_deeponet = true; % Train the temporal basis model.
+cfg.common.use_gpu = true; % Require GPU training when enabled.
+cfg.common.save_svd_model = true; % Save the deployable SVD model.
+cfg.common.save_sts_model = true; % Save the deployable STS model.
+cfg.common.save_svd_prediction = true; % Save SVD test predictions.
+cfg.common.save_sts_prediction = true; % Save STS test predictions.
+cfg.common.save_log = true; % Save the experiment log.
+cfg.common.save_svd_relative_l2_vs_time = true; % Save the SVD mean error curve.
+cfg.common.save_sts_relative_l2_vs_time = true; % Save the STS mean error curve.
+cfg.common.save_gt_train = false; % Save training trajectories.
+cfg.common.save_gt_validation = false; % Save validation trajectories.
+cfg.common.save_gt_test = true; % Save test trajectories.
+%% Reference data
+cfg.reference_data.data_seed = 42; % Shared random data seed.
+cfg.reference_data.Nx = 256; % Periodic output grid points.
+cfg.reference_data.Nt = 100; % Output times including zero and one.
+cfg.reference_data.Nref = 512; % Fourier reference grid points.
+cfg.reference_data.nsensor = 128; % Uniform periodic input sensors.
+cfg.reference_data.num_of_training_sample = 2000; % Training cases.
+cfg.reference_data.num_of_validation_sample = 400; % Validation cases.
+cfg.reference_data.num_of_testing_sample = 400; % Test cases.
+cfg.reference_data.nfit = 2000; % Training cases for basis and statistics.
+cfg.reference_data.substeps = 4; % Strang steps per output interval.
+cfg.reference_data.diffusion = 0.005; % Periodic diffusion coefficient.
+cfg.reference_data.reaction = 5; % Logistic growth rate.
+cfg.reference_data.batch_size = 64; % Cases per reference batch.
+%% Fixed-basis SVD DeepONet
+cfg.svd.training_seed = 1000; % Network and optimizer seed.
+cfg.svd.width = 128; % Hidden layer width.
+cfg.svd.hidden_layers = 3; % Number of tanh hidden layers.
+cfg.svd.alpha = 0; % Coefficient scaling: zero or one.
+cfg.svd.energy = 0.9999; % Retained squared singular-value energy.
+cfg.svd.total_epoch = 20000; % Full-batch Adam updates.
+cfg.svd.initial_lr = 1e-3; % Initial Adam learning rate.
+cfg.svd.lr_decay_step = 2000; % Updates per learning-rate decay.
+cfg.svd.lr_decay_ratio = 0.9; % Learning-rate decay factor.
+cfg.svd.beta1 = 0.9; % Adam first-moment decay.
+cfg.svd.beta2 = 0.999; % Adam second-moment decay.
+cfg.svd.epsilon = 1e-8; % Adam denominator offset.
+cfg.svd.lbfgs_updates = 500; % Accepted joint L-BFGS updates.
+cfg.svd.lbfgs_gradient_calls = 2000; % Joint L-BFGS gradient budget.
+cfg.svd.vp_updates = 500; % Accepted variable-projection updates.
+cfg.svd.vp_gradient_calls = 2000; % Variable-projection gradient budget.
+cfg.svd.lbfgs_history = 10; % L-BFGS history size.
+cfg.svd.lbfgs_linesearch = 10; % Strong-Wolfe trial limit.
+cfg.svd.lbfgs_tolerance = 1e-10; % Gradient and step stopping tolerance.
+%% STS star_M DeepONet
+cfg.sts.training_seed = 1000; % Network and optimizer seed.
+cfg.sts.width = 128; % Hidden layer width.
+cfg.sts.hidden_layers = 3; % Number of tanh hidden layers.
+cfg.sts.alpha = 0; % Coefficient scaling: zero or one.
+cfg.sts.energy = 0.9999; % Slice and temporal retained energy.
+cfg.sts.total_epoch = 20000; % Full-batch Adam updates.
+cfg.sts.initial_lr = 1e-3; % Initial Adam learning rate.
+cfg.sts.lr_decay_step = 2000; % Updates per learning-rate decay.
+cfg.sts.lr_decay_ratio = 0.9; % Learning-rate decay factor.
+cfg.sts.beta1 = 0.9; % Adam first-moment decay.
+cfg.sts.beta2 = 0.999; % Adam second-moment decay.
+cfg.sts.epsilon = 1e-8; % Adam denominator offset.
+cfg.sts.lbfgs_updates = 500; % Accepted joint L-BFGS updates.
+cfg.sts.lbfgs_gradient_calls = 2000; % Joint L-BFGS gradient budget.
+cfg.sts.vp_updates = 500; % Accepted variable-projection updates.
+cfg.sts.vp_gradient_calls = 2000; % Variable-projection gradient budget.
+cfg.sts.lbfgs_history = 10; % L-BFGS history size.
+cfg.sts.lbfgs_linesearch = 10; % Strong-Wolfe trial limit.
+cfg.sts.lbfgs_tolerance = 1e-10; % Gradient and step stopping tolerance.
+end
