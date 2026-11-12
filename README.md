@@ -1,6 +1,6 @@
 # Fixed-Basis SVD-DeepONet and STS star_M DeepONet Benchmarks
 
-This repository provides self-contained MATLAB benchmarks for the Fixed-Basis SVD-DeepONet and the STS star_M DeepONet on four nonlinear PDEs. Each benchmark generates a shared reference dataset, trains both methods under identical data splits, exports their terminal models, and evaluates them on the same test set.
+This repository provides self-contained MATLAB benchmarks for the fixed-basis SVD-DeepONet and the STS star_M DeepONet on four nonlinear PDEs. Each benchmark generates a shared reference dataset, trains both methods under identical data splits, exports their terminal models, and evaluates them on the same test set.
 
 ## Requirements
 
@@ -46,7 +46,7 @@ Each benchmark contains exactly six MATLAB files:
 | `run.m` | Entry point for each benchmark. Loads the configuration, performs preflight resource checks, orchestrates reference-data generation, network training, and test evaluation, manages the run lifecycle and output directory, and verifies the committed artifacts. |
 | `config.m` | Supplies the default settings for each benchmark, matching the configurations used in the paper, and allows any of these settings to be adjusted manually. The configuration is organized into four groups: `common`, `reference_data`, `svd`, and `sts`. The data seed defaults to `reference_data.data_seed=42`, while `training_seed=1000` sets the network-training and optimizer seed for both methods. |
 | `reference_data_generator.m` | Generates the shared training, validation, and test reference solutions for the benchmark PDE using the prescribed numerical solver, and optionally saves them as `gt_*.mat` files. |
-| `svd_benchmark.m` | Runs the Fixed-Basis SVD-DeepONet pipeline: builds the global SVD basis from the training snapshots, fits normalization and projection, executes the staged optimization (Adam, output-head refitting, joint L-BFGS, and VP), exports the terminal model, and performs numeric inference. |
+| `svd_benchmark.m` | Runs the fixed-basis SVD-DeepONet pipeline: builds the global SVD basis from the training snapshots, fits normalization and projection, executes the staged optimization (Adam, output-head refitting, joint L-BFGS, and VP), exports the terminal model, and performs numeric inference. |
 | `sts_benchmark.m` | Runs the STS star_M DeepONet pipeline: performs slice-wise spatial truncation, extracts a compact temporal basis, trains the branch network using staged optimization, exports the terminal model, and performs numeric inference. |
 | `log_writer.m` | Writes reference-data and method statuses, available evaluation metrics, storage and timing statistics, hardware information, and failure details to `log.txt` in a colon-separated, sectioned format. |
 
