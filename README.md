@@ -53,7 +53,7 @@ Each benchmark contains exactly six MATLAB files:
 The table below summarizes the training, validation, and test sets, the basis and normalization fit cases, the spatio-temporal output grid, the sensor locations, and the branch architecture for each benchmark. Training, validation, and test share a common output grid, whereas the input sensors are defined on a separate grid.
 
 | Benchmark | Train / validation / test | Basis and normalization fit | Output grid | Sensor locations | Branch / Adam epochs |
-| --- | --- | --- | --- | --- | --- |
+| :--- | :---: | :---: | :---: | :---: | :--- |
 | KdV | 2000 / 400 / 400 | First 2000 training cases | 256 x 201 | 128 | Three 128-wide tanh layers / 20000 |
 | Burgers | 2000 / 400 / 400 | First 2000 training cases | 256 x 100 | 128 | Three 256-wide tanh layers / 20000 |
 | Fisher-KPP | 2000 / 400 / 400 | First 2000 training cases | 256 x 100 | 128 | Three 128-wide tanh layers / 20000 |
@@ -68,13 +68,13 @@ All remaining parameters, such as learning-rate schedules, optimizer budgets, an
 
 | File | Contents | Configuration key (default) |
 | --- | --- | --- |
-| `gt_train.mat` | Training ground truth (`u`) and metadata. | `save_gt_train` (false) |
-| `gt_validation.mat` | Validation ground truth (`u`) and metadata. | `save_gt_validation` (false) |
-| `gt_test.mat` | Test ground truth (`u`) and metadata. | `save_gt_test` (true) |
+| `gt_train.mat` | Training ground truth `u` and metadata. | `save_gt_train` (false) |
+| `gt_validation.mat` | Validation ground truth `u` and metadata. | `save_gt_validation` (false) |
+| `gt_test.mat` | Test ground truth `u` and metadata. | `save_gt_test` (true) |
 | `svd_model.mat` | Final trained fixed-basis SVD DeepONet model. | `save_svd_model` (true) |
 | `sts_model.mat` | Final trained STS star_M DeepONet model. | `save_sts_model` (true) |
 | `svd_prediction.mat` | Test-set predictions from the final trained fixed-basis SVD DeepONet model. | `save_svd_prediction` (true) |
-| `sts_prediction.mat` | Test-set predictions from the final trained STS star_M DeepONet model. | 
+| `sts_prediction.mat` | Test-set predictions from the final trained STS star_M DeepONet model. | `save_sts_prediction` (true) |
 | `svd_relative_l2_vs_time.mat` | Mean test relative L2 error at each time point. | `save_svd_relative_l2_vs_time` (true) |
 | `sts_relative_l2_vs_time.mat` | Mean test relative L2 error at each time point. | `save_sts_relative_l2_vs_time` (true) |
 | `log.txt` | Run log. | `save_log` (true) |
